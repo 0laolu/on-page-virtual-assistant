@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>On Page Assistant</title>
+  </head>
+  <body>
+
+    <div class="avatar-container">
+      <canvas class="avatar"></canvas>
+      <div class="avatar-description"></div>
+    </div>
+
+    <div class="buttons-container">
+      <div class="btn-container">
+        <button id="first" class="button" onclick="elementCordinates('first', event)"> Red </button>
+      </div>
+
+      <div class="btn-container">
+        <button id="second" class="button" onclick="elementCordinates('second', event)"> Blue </button>
+      </div>
+
+      <div class="btn-container">
+        <button id="third" class="button" onclick="elementCordinates('third', event)"> Green </button>
+      </div>
+
+      <div class="btn-container">
+        <button id="fourth" class="button" onclick="elementCordinates('fourth', event)"> Purple </button>
+      </div>
+
+      <div class="btn-container">
+        <button id="fifth" class="button" onclick="elementCordinates('fifth', event)"> Black </button>
+      </div>
+
+      <div class="btn-container">
+        <button id="sixth" class="button" onclick="elementCordinates('sixth', event)"> Pink </button>
+      </div>  
+      
+    </div>
+
+    <script>
+      function elementCordinates(location, event) {
+
+        // getting the cordinates of the button
+        const buttonLocation = document.getElementById(location)
+        const position = buttonLocation.getBoundingClientRect()
+        const horizontalPlane = position.left
+        const verticalPlane = position.top
+
+        // getting the cordinates of the avatar
+        const avatarLocation = document.querySelector(".avatar-container")
+        avatarLocation.style.left = "0px"
+        avatarLocation.style.top = "0px"
+
+        const setHorizontalPosition = horizontalPlane + 70
+        const setVerticalPosition = verticalPlane - 10
+
+        console.log(verticalPlane, horizontalPlane)
+        console.log(setVerticalPosition, setHorizontalPosition)
+
+
+
+        // set new cords.
+        avatarLocation.style.transition = "all 1.3s ease-in-out";
+        avatarLocation.style.top = `${setVerticalPosition}px`;
+        avatarLocation.style.left = `${setHorizontalPosition}px`;
+
+        const description = document.querySelector(".avatar-description");
+        description.style.display = "block";
+
+        const btnInnerText = event.target.innerText;
+
+        while (description.firstChild) {
+          description.removeChild(description.firstChild);
+        }
+
+        const paragraph = document.createElement("p");
+        paragraph.textContent = `This is a button that ${btnInnerText}'s an element`;
+
+        description.appendChild(paragraph);
+      }
+    </script>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
