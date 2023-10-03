@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./style.css" />
     <title>On Page Assistant</title>
   </head>
-  <body>
+  <body class="main">
 
     <div class="avatar-container">
       <canvas class="avatar"></canvas>
@@ -44,7 +44,8 @@
 
     <script>
       function elementCordinates(location, event) {
-
+        const bodyTag = document.querySelector(".main")
+        
         // getting the cordinates of the button
         const buttonLocation = document.getElementById(location)
         const position = buttonLocation.getBoundingClientRect()
@@ -79,9 +80,11 @@
         }
 
         const paragraph = document.createElement("p");
-        paragraph.textContent = `This is a button that ${btnInnerText}'s an element`;
+        paragraph.textContent = `This button turns the page background color ${btnInnerText}`;
 
         description.appendChild(paragraph);
+
+        bodyTag.style.backgroundColor = `${btnInnerText.toLowerCase()}`
       }
     </script>
     <script type="module" src="/main.js"></script>
